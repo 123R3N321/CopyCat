@@ -1,8 +1,13 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
+//#include <glad/glad.h>
+#include "../library/include/glad/glad.h"
+
+
+//#include <glm/glm.hpp>
+#include "../library/include/glm/glm.hpp"
+
 using namespace glm;
 #include <string>
 #include <fstream>
@@ -12,7 +17,7 @@ using namespace std;
 
 class Shader {
 private:
-	GLuint program;				// ÓëÎÆÀíÀàËÆ£¬Ã¿¸ö×ÅÉ«Æ÷Ò²ÓÐÎ¨Ò»µÄµ¥ÔªÓëÖ®Æ¥Åä
+	GLuint program;				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½Ò²ï¿½ï¿½Î¨Ò»ï¿½Äµï¿½Ôªï¿½ï¿½Ö®Æ¥ï¿½ï¿½
 public:
 	Shader(string vertexPath, string fragmentPath) {
 		string vertexCode;
@@ -21,7 +26,7 @@ public:
 		ifstream fShaderFile(fragmentPath);
 		stringstream vShaderStream, fShaderStream;
 
-		// ¶ÁÈ¡ÎÄ¼þÖÐµÄ×ÅÉ«Æ÷
+		// ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½É«ï¿½ï¿½
 		string line;
 		while (!vShaderFile.eof()) {
 			getline(vShaderFile, line);
@@ -32,30 +37,30 @@ public:
 			fShaderStream << line + '\n';
 		}
 
-		// °ÑÁ÷Êý¾Ý×ª»¯Îªstring
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªstring
 		vertexCode = vShaderStream.str();
 		fragmentCode = fShaderStream.str();
 
 		const char* vShaderCode = vertexCode.c_str();
 		const char* fShaderCode = fragmentCode.c_str();
 
-		// ¶¥µã×ÅÉ«Æ÷
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
 		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertexShader, 1, &vShaderCode, NULL);
 		glCompileShader(vertexShader);
 		checkCompileErrors(vertexShader, "VERTEX");
-		// Æ¬¶Î×ÅÉ«Æ÷
+		// Æ¬ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
 		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShader, 1, &fShaderCode, NULL);
 		glCompileShader(fragmentShader);
 		checkCompileErrors(fragmentShader, "FRAGMENT");
-		// ×ÅÉ«Æ÷³ÌÐò
+		// ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		program = glCreateProgram();
 		glAttachShader(program, vertexShader);
 		glAttachShader(program, fragmentShader);
 		glLinkProgram(program);
 		checkCompileErrors(program, "PROGRAM");
-		// ×ÅÉ«Æ÷Á¬½Ó³ÌÐòºóÉ¾³ý
+		// ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
 	}
@@ -71,11 +76,11 @@ public:
 	GLuint GetProgram() {
 		return program;
 	}
-	// °ó¶¨×ÅÉ«Æ÷
+	// ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
 	void Bind() {
 		glUseProgram(program);
 	}
-	// ½â°ó×ÅÉ«Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
 	void Unbind() {
 		glUseProgram(0);
 	}
@@ -100,7 +105,7 @@ public:
 		glUniformMatrix4fv(GetLocation(name), 1, GL_FALSE, &val[0][0]);
 	}
 private:
-	// ¼ì²é±àÒë×ÅÉ«Æ÷¹ý³ÌÖÐÓÐÃ»ÓÐ³ö´í
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð³ï¿½ï¿½ï¿½
 	void checkCompileErrors(GLuint shader, string type) {
 		GLint success;
 		GLchar infoLog[1024];
@@ -123,7 +128,7 @@ private:
 			}
 		}
 	}
-	// »ñÈ¡×ÅÉ«Æ÷ÄÚ²¿±äÁ¿µÄµØÖ·
+	// ï¿½ï¿½È¡ï¿½ï¿½É«ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ö·
 	GLuint GetLocation(const char* name) {
 		GLint location = glGetUniformLocation(program, name);
 

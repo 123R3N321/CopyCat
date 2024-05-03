@@ -1,7 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <glad/glad.h>
+//#include <glad/glad.h>
+#include "../library/include/glad/glad.h"
+
+
+
 #include "texture.h"
 #include "shader.h"
 #include "model.h"
@@ -9,22 +13,22 @@
 
 class Player {
 private:
-	vec2 windowSize;					// ´°¿Ú³ß´ç
-	// Ç¹µÄÏà¹ØÊý¾Ý
+	vec2 windowSize;					// dependednt on main
+	//
 	Model* gun;
-	vec3 gunPos;						// Ç¹µÄÎ»ÖÃ×ø±ê
+	vec3 gunPos;						//change to doom style?
 	Shader* gunShader;
-	mat4 gunModel;						// Ç¹Ä£ÐÍÎ»ÖÃ±ä»»¾ØÕó
-	Texture* diffuseMap;				// Âþ·´ÉäÌùÍ¼
-	Texture* specularMap;				// ¾µÃæ·´ÉäÌùÍ¼
-	float gunRecoil;					// ºó×ùÁ¦
-	// ×¼ÐÇ
+	mat4 gunModel;						// this is using obj from online
+	Texture* diffuseMap;				// ?????????
+	Texture* specularMap;				// ??????????
+	float gunRecoil;					// we can let go this one
+	//
 	Model* dot;							
 	Shader* dotShader;
-	mat4 dotModel;						// ×¼ÐÇÄ£ÐÍÎ»ÖÃ±ä»»¾ØÕó
-	// ÉãÏñÍ·
+	mat4 dotModel;						//
+	//
 	Camera* camera;
-	// ±ä»»¾ØÕó
+	//
 	mat4 projection;
 	mat4 view;
 public:
@@ -39,7 +43,7 @@ public:
 		LoadTexture();
 		LoadShader();
 	}
-	// ¸üÐÂ±ä»»¾ØÕó¡¢ÉãÏñÍ·Î»ÖÃµÈÊý¾Ý
+	// ï¿½ï¿½ï¿½Â±ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Î»ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
 	void Update(float deltaTime,  bool isShoot) {
 		if (isShoot)
 			gunRecoil = 10.0f;
@@ -63,7 +67,7 @@ public:
 		gunModel = translate(gunModel, vec3(-0.225, 0.0, -0.225));
 		gunModel = rotate(gunModel, radians(-170.0f), vec3(0.0, 1.0, 0.0));
 	}
-	// äÖÈ¾³¡¾°
+	// ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
 	void Render() {
 		dotShader->Bind();
 		dotShader->SetMat4("projection", projection);
@@ -90,19 +94,19 @@ public:
 		gunShader->Unbind();
 	}
 private:
-	// ¼ÓÔØÇ¹Ä£ÐÍ
+	// ï¿½ï¿½ï¿½ï¿½Ç¹Ä£ï¿½ï¿½
 	void LoadGun() {
-		gun = new Model("res/model/gun.obj");
-		dot = new Model("res/model/dot.obj");
+		gun = new Model("../res/model/gun.obj");
+		dot = new Model("../res/model/dot.obj");
 	}
-	// ¼ÓÔØÎÆÀí
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void LoadTexture() {
-		diffuseMap = new Texture("res/texture/gun-diffuse-map.jpg");
-		specularMap = new Texture("res/texture/gun-specular-map.jpg");
+		diffuseMap = new Texture("../res/texture/gun-diffuse-map.jpg");
+		specularMap = new Texture("../res/texture/gun-specular-map.jpg");
 	}
-	// ¼ÓÔØ×ÅÉ«Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
 	void LoadShader() {
-		gunShader = new Shader("res/shader/gun.vert", "res/shader/gun.frag");
+		gunShader = new Shader("../res/shader/gun.vert", "../res/shader/gun.frag");
 		gunShader->Bind();
 		gunShader->SetInt("material.diffuse", 0);
 		gunShader->SetInt("material.specular", 1);
@@ -114,7 +118,7 @@ private:
 		gunShader->SetVec3("viewPos", camera->GetPosition());
 		gunShader->Unbind();
 
-		dotShader = new Shader("res/shader/ball.vert", "res/shader/ball.frag");
+		dotShader = new Shader("../res/shader/ball.vert", "../res/shader/ball.frag");
 		dotShader->Bind();
 		dotShader->SetVec3("color", vec3(1.0, 0.0, 0.0));
 		dotShader->Unbind();

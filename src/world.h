@@ -1,7 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
+#include "../library/include/GLFW/glfw3.h"
 #include "place.h"
 #include "player.h"
 #include "camera.h"
@@ -12,12 +13,12 @@ private:
 	GLFWwindow* window;
 	vec2 windowSize;
 
-	Place* place;				// ³¡¾°
-	Player* player;				// Íæ¼Ò
-	Camera* camera;				// ÉãÏñ»ú
-	BallManager* ball;			// Ð¡Çò
+	Place* place;				//
+	Player* player;				//
+	Camera* camera;				//
+	BallManager* ball;			//
 
-	// ÒõÓ°
+	//
 	GLuint depthMap;
 	GLuint depthMapFBO;
 	Shader* simpleDepthShader;
@@ -27,7 +28,7 @@ public:
 		this->window = window;
 		this->windowSize = windowSize;
 
-		simpleDepthShader = new Shader("res/shader/shadow.vert", "res/shader/shadow.frag");
+		simpleDepthShader = new Shader("../res/shader/shadow.vert", "../res/shader/shadow.frag");
 
 		vec3 lightPos(0.0, 400.0, 150.0);
 		mat4 lightProjection = ortho(-100.0f, 100.0f, -100.0f, 100.0f, 1.0f, 500.0f);
@@ -48,7 +49,7 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
-	// ¸üÐÂÊý¾Ý
+	//
 	void Update(float deltaTime) {
 		camera->Update(deltaTime);
 		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
@@ -61,7 +62,7 @@ public:
 		}
 		place->Update();
 	}
-	// äÖÈ¾Ä£ÐÍ
+	// This might be causing trouble
 	void Render() {
 		RenderDepth();
 		player->Render();
@@ -73,16 +74,16 @@ public:
 	GLuint GetScore() {
 		return ball->GetScore();
 	}
-	// ÅÐ¶ÏÓÎÏ·ÊÇ·ñ½áÊø
+	// ï¿½Ð¶ï¿½ï¿½ï¿½Ï·ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	bool IsOver() {
 		return ball->IsOver();
 	}
-	// ÉèÖÃÓÎÏ·Ä£Ê½
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·Ä£Ê½
 	void SetGameModel(GLuint num) {
 		ball->SetGameModel(num);
 	}
 private:
-	// äÖÈ¾Éî¶ÈÍ¼
+	// ï¿½ï¿½È¾ï¿½ï¿½ï¿½Í¼
 	void RenderDepth() {
 		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);

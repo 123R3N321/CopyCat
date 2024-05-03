@@ -1,17 +1,43 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+//#include <glad/glad.h>
+#include "../library/include/glad/glad.h"
+
+//#include <GLFW/glfw3.h>
+#include "../library/include/GLFW/glfw3.h"
+
+
+
 #include "world.h"
+
+
+
+/**
+ * Overall architecture of reworked engine:
+ *
+ *
+ *
+ *
+ * main-->world
+ */
+
+
+
+
+
+
+
+
 
 void OpenWindow();
 void PrepareOpenGL();
+
 
 GLFWwindow* window;
 vec2 windowSize;
 
 int main() {
-    // 帧速率
-    const double TARGET_FRAME = 0.016667;                   // 1/60秒，实现60帧
-    const double FRAME_ALPHA = 0.25;                        // 计算系数
+    //
+    const double TARGET_FRAME = 0.016667;                   // 1/60锟诫，实锟斤拷60帧
+    const double FRAME_ALPHA = 0.25;                        // 锟斤拷锟斤拷系锟斤拷
     double currentFrame;
     double deltaTime;
     double lastFrame;
@@ -22,14 +48,15 @@ int main() {
     srand(time(0));
 
     GLuint gameModel = 1;
-    cout << "------------请选择游戏模式：1、休闲模式，2、挑战模式（输入模式前的序号即可）------------\n";
-    cin >> gameModel;
+    cout << "------------We are runing main------------\n";
+//    cin >> gameModel; try default param
     cout << "\n";
         
     OpenWindow();
     PrepareOpenGL();
-
+    cout<<"is Opengl prepped?"<<endl;
     World world(window, windowSize);
+    cout<<"Seems like world init is problem"<<endl;
 
     currentFrame = glfwGetTime();
     lastFrame = currentFrame;
@@ -37,8 +64,13 @@ int main() {
     world.SetGameModel(gameModel);
     float gameTime = 0;
 
-    while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) {
-        // 求帧速率
+    cout<<"right before loop?"<<endl;
+
+    //the while loop game loop
+    while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)
+            && !glfwGetKey(window, GLFW_KEY_Q)) {
+//        cout<<"am I in loop?"<<endl;
+        //
         currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -50,7 +82,7 @@ int main() {
 
             renderAccum -= TARGET_FRAME;
 
-            world.Update(deltaTime);
+            world.Update(deltaTime);    //this might be causing trouble
             if (world.IsOver())
                 break;
             world.Render();
@@ -59,16 +91,16 @@ int main() {
         glfwPollEvents();
     }
     glfwTerminate();
-    cout << "----------------------------您的得分为：" << world.GetScore() << " ----------------------------" << endl;
+    cout << "----------------------------world ended properly" << world.GetScore() << " ----------------------------" << endl;
     return 0;
 }
 
 void OpenWindow() {
-    const char* TITLE = "Shoot Game";
-    int WIDTH = 1960;
-    int HEIGHT = 1080;
+    const char* TITLE = "Experimenting";
+    int WIDTH = 980;
+    int HEIGHT = 540;
 
-    // 初始化GLFW
+    //
     if (!glfwInit()) {
         cout << "Could not initialize GLFW" << endl;
         return;
@@ -101,11 +133,9 @@ void OpenWindow() {
 }
 
 void PrepareOpenGL() {
-    // 打开深度测试和混合
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // 把背景设置为天蓝色
     glClearColor(0.529f, 0.808f, 0.922f, 0.0f);
 }

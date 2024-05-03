@@ -1,8 +1,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <glad/glad.h>
-#include <stb_image/stb_image.h>
+//#include <glad/glad.h>
+#include "../library/include/glad/glad.h"
+
+//#include <stb_image/stb_image.h>
+#include "../library/include/stb_image/stb_image.h"
+
 #include <iostream>
 using namespace std;
 

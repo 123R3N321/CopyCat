@@ -1,8 +1,15 @@
 #ifndef BALLMANAGER_H
 #define BALLMANAGER_H
 
-#include <glm/glm.hpp>
-#include <glm/gtc/random.hpp>
+//#include <glm/glm.hpp>
+#include "../library/include/glm/glm.hpp"
+
+
+
+//#include <glm/gtc/random.hpp>
+#include "../library/include/glm/gtc/random.hpp"
+
+
 using namespace glm;
 #include <cstdlib>
 #include <ctime>
@@ -18,18 +25,18 @@ private:
 
 	Model* ball;
 	Shader* ballShader;
-	GLuint number;						// µ±Ç°Ð¡ÇòÊýÄ¿
-	GLuint maxNumber;					// Ð¡Çò×î´óÊýÄ¿
-	vec3 basicPos;						// Ð¡Çò»ù´¡×ø±ê
-	vector<vec3> position;				// ³¡ÉÏ´æÔÚµÄÐ¡Çò×ø±ê
-	float moveSpeed;					// Ð¡ÇòÒÆ¶¯ËÙ¶È
-	GLuint score;						// µÃ·Ö
-	GLuint gameModel;					// ÓÎÏ·Ä£Ê½
-	vec3 lightPos;						// ¹âÔ´Î»ÖÃ
-	mat4 lightSpaceMatrix;				// ½«¶¥µãÊÀ½ç×ø±ê×ª»»ÎªÒÔ¹âÔ´ÎªÖÐÐÄµÄ×ø±ê
+	GLuint number;						// ï¿½ï¿½Ç°Ð¡ï¿½ï¿½ï¿½ï¿½Ä¿
+	GLuint maxNumber;					// Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+	vec3 basicPos;						// Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	vector<vec3> position;				// ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Úµï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	float moveSpeed;					// Ð¡ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
+	GLuint score;						// ï¿½Ã·ï¿½
+	GLuint gameModel;					// ï¿½ï¿½Ï·Ä£Ê½
+	vec3 lightPos;						// ï¿½ï¿½Ô´Î»ï¿½ï¿½
+	mat4 lightSpaceMatrix;				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½Ô¹ï¿½Ô´Îªï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½
 
 	Camera* camera;
-	// Ä£ÐÍ±ä»»¾ØÕó
+	// Ä£ï¿½Í±ä»»ï¿½ï¿½ï¿½ï¿½
 	mat4 model;
 	mat4 projection;
 	mat4 view;
@@ -49,11 +56,11 @@ public:
 		AddBall();
 		LoadModel();
 	}
-	// ÉèÖÃÓÎÏ·Ä£Ê½
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·Ä£Ê½
 	void SetGameModel(GLuint num) {
 		gameModel = num;
 	}
-	// ¸üÐÂ±ä»»¾ØÕó£¬ÅÐ¶ÏÉä»÷ÊÇ·ñ»÷ÖÐÐ¡Çò
+	// ï¿½ï¿½ï¿½Â±ä»»ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 	void Update(vec3 pos, vec3 dir, bool isShoot) {
 		this->view = camera->GetViewMatrix();
 		this->projection = perspective(radians(camera->GetZoom()), windowSize.x / windowSize.y, 0.1f, 500.0f);
@@ -88,7 +95,7 @@ public:
 			AddBall();
 		}
 	}
-	// ÅÐ¶ÏÓÎÏ·ÊÇ·ñ½áÊø
+	// ï¿½Ð¶ï¿½ï¿½ï¿½Ï·ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	bool IsOver() {
 		if (position.size() > 0)
 			if (position[0].z >= 70)
@@ -99,7 +106,7 @@ public:
 	GLuint GetScore() {
 		return score;
 	}
-	// äÖÈ¾Ð¡Çò
+	// ï¿½ï¿½È¾Ð¡ï¿½ï¿½
 	void Render(Shader* shader, GLuint depthMap = -1) {
 		for (GLuint i = 0; i < position.size(); i++) {
 			model = mat4(1.0);
@@ -127,8 +134,8 @@ public:
 	}
 private:
 	void LoadModel() {
-		ball = new Model("res/model/dot.obj");
-		ballShader = new Shader("res/shader/ball.vert", "res/shader/ball.frag");
+		ball = new Model("../res/model/dot.obj");
+		ballShader = new Shader("../res/shader/ball.vert", "../res/shader/ball.frag");
 		ballShader->Bind();
 		ballShader->SetVec3("color", vec3(0.2, 0.5, 0.5f));
 		ballShader->SetInt("shadowMap", 0);
@@ -137,7 +144,7 @@ private:
 		ballShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
 		ballShader->Unbind();
 	}
-	// Ìí¼ÓÐ¡Çò
+	// ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 	void AddBall() {
 		for (GLuint i = number; i < maxNumber; i++) {
 			float judgeX = rand() % 2;
@@ -152,7 +159,7 @@ private:
 				i--;
 		}
 	}
-	// ¼ì²éÒÑ´æÔÚÐ¡ÇòµÄÎ»ÖÃ£¬±ÜÃâÌí¼ÓµÄÐ¡Çò³öÏÖÖØµþ
+	// of the ball itself
 	bool CheckPosition(vec3 pos) {
 		for (GLuint i = 0; i < position.size(); i++) {
 			float away = pow(position[i].x - pos.x, 2) + pow(position[i].y - pos.y, 2);

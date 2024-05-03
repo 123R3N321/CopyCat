@@ -1,21 +1,31 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <glad/glad.h>
+//#include <glad/glad.h>
+#include "../library/include/glad/glad.h"
+
 #include <string>
 #include <iostream>
 #include <vector>
 using namespace std;
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+//#include <assimp/Importer.hpp>
+#include "../library/include/assimp/Importer.hpp"
+
+
+//#include <assimp/scene.h>
+#include "../library/include/assimp/scene.h"
+
+//#include <assimp/postprocess.h>
+#include "../library/include/assimp/postprocess.h"
+
+
 using namespace Assimp;
 
 class Model {
 private:
-    vector<GLfloat> vertices;           // ¶¥µã×ø±ê
-    vector<GLuint> indices;             // ×ø±êË÷Òý
-    GLuint VAO;                         // Ä£ÐÍµÄ»º³åÊý¾Ý
+    vector<GLfloat> vertices;
+    vector<GLuint> indices;
+    GLuint VAO;
 public:
     Model(const string& path) {
         LoadModel(path);
@@ -30,7 +40,6 @@ public:
         return indices;
     }
 private:
-    // ´ÓÎÄ¼þÖÐÔØÈëÄ£ÐÍ£¬Ê¹ÓÃassimp¿â²Ù×÷
     void LoadModel(const string& path) {
         Importer importer;
         const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
@@ -41,34 +50,34 @@ private:
         }
         ProcessNode(scene->mRootNode, scene);
     }
-    // ¶ÔËùÓÐ½Úµã½øÐÐ²Ù×÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð½Úµï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
     void ProcessNode(aiNode* node, const aiScene* scene) {
-        // ¶Ôµ±Ç°½ÚµãµÄËùÓÐÍø¸ñ½øÐÐ²Ù×÷
+        // ï¿½Ôµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
         for (GLuint i = 0; i < node->mNumMeshes; i++) {
-            // nodeÖÐÖ»°üº¬ÁËÖ¸ÏòsceneÖÐÊý¾ÝµÄË÷Òý
+            // nodeï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½sceneï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
             ProcessMesh(mesh, scene);
         }
-        // ´¦Àí×Ó½Úµã
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
         for (GLuint i = 0; i < node->mNumChildren; i++) {
             ProcessNode(node->mChildren[i], scene);
         }
     }
-    // ¶Ô½ÚµãÖÐµÄËùÓÐÍø¸ñ½øÐÐ²Ù×÷
+    // ï¿½Ô½Úµï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
     void ProcessMesh(aiMesh* mesh, const aiScene* scene) {
-        // ±éÀúËùÓÐÍø¸ñµÄ¶¥µã
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
         for (GLuint i = 0; i < mesh->mNumVertices; i++) {
-            // Î»ÖÃ×ø±ê
+            // Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             vertices.push_back(mesh->mVertices[i].x);
             vertices.push_back(mesh->mVertices[i].y);
             vertices.push_back(mesh->mVertices[i].z);
 
-            // ·¨Ïß×ø±ê
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             vertices.push_back(mesh->mNormals[i].x);
             vertices.push_back(mesh->mNormals[i].y);
             vertices.push_back(mesh->mNormals[i].z);
 
-            // ÎÆÀí×ø±ê
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (mesh->mTextureCoords[0]) {
                 vertices.push_back(mesh->mTextureCoords[0][i].x);
                 vertices.push_back(mesh->mTextureCoords[0][i].y);
@@ -79,7 +88,7 @@ private:
             }
         }
 
-        // ±éÀúÍø¸ñµÄÃæ£¬»ñÈ¡Ë÷Òý
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
         for (GLuint i = 0; i < mesh->mNumFaces; i++)
         {
             aiFace face = mesh->mFaces[i];
@@ -87,7 +96,7 @@ private:
                 indices.push_back(face.mIndices[j]);
         }
     }
-    // ½«¶ÁÈ¡µÄÄ£ÐÍÊý¾ÝÔØÈë»º³åÇø£¬±ãÓÚºóÐøÊ¹ÓÃ
+    // ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë»ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
     void SetVAO() {
         GLuint VBO, EBO;
         glGenVertexArrays(1, &VAO);

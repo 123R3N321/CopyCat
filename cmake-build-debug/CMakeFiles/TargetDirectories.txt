@@ -1,0 +1,3 @@
+/home/ren/projects/Shoot-Game/cmake-build-debug/CMakeFiles/Shoot_Game.dir
+/home/ren/projects/Shoot-Game/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ren/projects/Shoot-Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir

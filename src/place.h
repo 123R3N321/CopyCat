@@ -1,7 +1,10 @@
 #ifndef PLACE_H
 #define PLACE_H
 
-#include <glad/glad.h>
+//#include <glad/glad.h>
+#include "../library/include/glad/glad.h"
+
+
 #include "model.h"
 #include "texture.h"
 #include "shader.h"
@@ -10,19 +13,19 @@
 class Place {
 private:
 	vec2 windowSize;
-	// ·¿¼ä
+	// ï¿½ï¿½ï¿½ï¿½
 	Model* room;
 	Texture* roomTexture;
 	Shader* roomShader;
 
-	// Ì«Ñô
+	// Ì«ï¿½ï¿½
 	Model* sun;
-	vec3 lightPos;							// ¹âÔ´Î»ÖÃ
-	mat4 lightSpaceMatrix;					// ½«¶¥µãÊÀ½ç×ø±ê×ª»»ÎªÒÔ¹âÔ´ÎªÖÐÐÄµÄ×ø±ê
+	vec3 lightPos;							// ï¿½ï¿½Ô´Î»ï¿½ï¿½
+	mat4 lightSpaceMatrix;					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½Ô¹ï¿½Ô´Îªï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½
 	Shader* sunShader;
 
 	Camera* camera;
-	// Ä£ÐÍ±ä»»¾ØÕó
+	// Ä£ï¿½Í±ä»»ï¿½ï¿½ï¿½ï¿½
 	mat4 model;
 	mat4 projection;
 	mat4 view;
@@ -38,13 +41,13 @@ public:
 		LoadTexture();
 		LoadShader();
 	}
-	// ¸üÐÂ±ä»»¾ØÕó
+	// ï¿½ï¿½ï¿½Â±ä»»ï¿½ï¿½ï¿½ï¿½
 	void Update() {
 		this->model = mat4(1.0);
 		this->view = camera->GetViewMatrix();
 		this->projection = perspective(radians(camera->GetZoom()), windowSize.x / windowSize.y, 0.1f, 500.0f);
 	}
-	// äÖÈ¾·¿¼ä
+	// ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
 	void RoomRender(Shader* shader, int depthMap = -1) {
 		if (shader == NULL) {
 			shader = roomShader;
@@ -67,7 +70,7 @@ public:
 		shader->Unbind();
 		glBindVertexArray(0);
 	}
-	// äÖÈ¾Ì«Ñô
+	// ï¿½ï¿½È¾Ì«ï¿½ï¿½
 	void SunRender() {
 		Shader* shader = sunShader;
 		shader->Bind();
@@ -80,18 +83,18 @@ public:
 		glBindVertexArray(0);
 	}
 private:
-	// ¼ÓÔØÄ£ÐÍ
+	// ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
 	void LoadModel() {
-		room = new Model("res/model/room.obj");
-		sun = new Model("res/model/sun.obj");
+		room = new Model("../res/model/room.obj");
+		sun = new Model("../res/model/sun.obj");
 	}
-	// ¼ÓÔØÎÆÀí
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void LoadTexture() {
-		roomTexture = new Texture("res/texture/wall.jpg");
+		roomTexture = new Texture("../res/texture/wall.jpg");
 	}
-	// ¼ÓÔØ×ÅÉ«Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
 	void LoadShader() {
-		roomShader = new Shader("res/shader/room.vert", "res/shader/room.frag");
+		roomShader = new Shader("../res/shader/room.vert", "../res/shader/room.frag");
 		roomShader->Bind();
 		roomShader->SetInt("diffuse", 0);
 		roomShader->SetInt("shadowMap", 1);
@@ -100,7 +103,7 @@ private:
 		roomShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
 		roomShader->Unbind();
 
-		sunShader = new Shader("res/shader/sun.vert", "res/shader/sun.frag");
+		sunShader = new Shader("../res/shader/sun.vert", "../res/shader/sun.frag");
 		sunShader->Bind();
 		sunShader->Unbind();
 	}
