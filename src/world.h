@@ -24,7 +24,7 @@ private:
 	mat4 lightSpaceMatrix;
 
 public:
-	World(GLFWwindow* window, vec2 windowSize, float r, float b, float g) {
+	World(GLFWwindow* window, vec2 windowSize, int ballcount, float r, float b, float g) {
 		this->window = window;
 		this->windowSize = windowSize;
 
@@ -36,7 +36,7 @@ public:
 		lightSpaceMatrix = lightProjection * lightView;
 
         camera = new Camera(window);    //must be initialized first for the rest
-        ball = new BallManager(windowSize, camera, r, b, g);
+        ball = new BallManager(windowSize, camera, ballcount, r, b, g);
 		place = new Place(windowSize, camera);
 		player = new Player(windowSize, camera);
 
@@ -85,11 +85,11 @@ public:
 	GLuint GetScore() {
 		return ball->GetScore();
 	}
-	// �ж���Ϸ�Ƿ����
+	// delegated method, from main to world to ballmanager
 	bool askBallManagerIfGameOver() {
 		return ball->checkGameOverCondition();
 	}
-	// ������Ϸģʽ
+	// same as above
 	void askBallManagerToSetGameMode(GLuint num) {
         ball->setGameMode(num);
 	}

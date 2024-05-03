@@ -14,7 +14,7 @@
 #include "../library/include/glm/gtc/matrix_transform.hpp"
 
 
-using namespace glm;
+using namespace glm;    //lol lazy
 
 // this is the hard part
 const float YAW = -90.0f;			//
@@ -31,25 +31,25 @@ class Camera {
 private:
 	GLFWwindow* window;
 
-	vec3 position;				// ����ͷλ��
-	vec3 front;					// ָ������ͷǰ���ĵ�λ����
-	vec3 right;					// ָ������ͷ�ҷ��ĵ�λ����
-	vec3 up;					// ָ������ͷ�Ϸ��ĵ�λ����
-	vec3 worldUp;				// ָ��������Ϸ��ĵ�λ����������ı�
+	vec3 position;				// init position
+	vec3 front;					// ָ
+	vec3 right;					// ָ
+	vec3 up;
+	vec3 worldUp;				//
 
-	// ��Ծ
-	float jumpTimer;			// ��Ծ����ʱ��
-	float gravity;				// �������ٶ�
-	bool isJump;				// �����жϵ�ǰ�ǲ��Ǵ�����Ծ״̬
+	//
+	float jumpTimer;			//
+	float gravity;				//
+	bool isJumping;				//
 
-	// ŷ����
-	float yaw;					// ƫ����
-	float pitch;				// ������
+	//
+	float yaw;					//copied as is
+	float pitch;				//
 
-	// ����ͷѡ��
-	float movementSpeed;		// ����ͷ�ƶ��ٶ�
-	float mouseSensitivity;		// �ӽ��ƶ��ٶ�
-	float zoom;					// �ӽǵĴ�С��һ��45.0f�Ƚ���ʵ
+	// this part is kinda sloppy, determined by local globals (lol oxymoron not intended)
+	float movementSpeed;		//
+	float mouseSensitivity;		//
+	float zoom;					//
 
 	// ���λ��
 	double mouseX;
@@ -65,7 +65,7 @@ public:
 		firstMouse = true;
 
 		jumpTimer = 0;
-		isJump = false;
+        isJumping = false;
 		gravity = -GRAVITY;
 
 		position = vec3(0.0f, HEIGHT, 70.0f);
@@ -75,7 +75,9 @@ public:
 
 		UpdateCamera();
 	}	
-	// ��������ͷ�����ݺͿ��Ƽ��̡��������
+	// this is the one we actually call,
+    //updte--> call mouse and keyboard --> call object update
+    // this solves penentration issue
 	void Update(float deltaTime) {
 		MouseMovement();
 		KeyboardInput(deltaTime);
@@ -117,7 +119,7 @@ private:
 			firstMouse = false;
 		}
 
-		yaw += ((newMouseX - mouseX) * mouseSensitivity);
+		yaw += ((newMouseX - mouseX) * mouseSensitivity);   //math copied as is
 		pitch += ((mouseY - newMouseY) * mouseSensitivity);
 
 		mouseX = newMouseX;
@@ -129,10 +131,10 @@ private:
 		if (pitch < -89.0f)
 			pitch = -89.0f;
 
-		// ����Front��Right��Up
+		// call update
 		UpdateCamera();
 	}
-	// ��������
+	// input system
 	void KeyboardInput(float deltaTime) {
 		float velocity = movementSpeed * deltaTime;
 		vec3 forward = normalize(cross(worldUp, right));
@@ -145,9 +147,9 @@ private:
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			position += right * velocity;
 
-		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !isJump) {
+		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !isJumping) {
 			jumpTimer = JUMPTIME;
-			isJump = true;
+            isJumping = true;
 		}
 		if (jumpTimer > 0) {
 			gravity += (JUMPSTRENGTH * (jumpTimer / JUMPTIME)) * deltaTime;
@@ -159,12 +161,12 @@ private:
 		if (position.y < HEIGHT) {
 			position.y = HEIGHT;
 			gravity = 0;
-			isJump = false;
+            isJumping = false;
 		}
 
 		CheckCollision();
 	}
-	// ��ײ���
+	// fake collision check because the smart method doesn't work
 	void CheckCollision() {
 		if (position.x > 90.0f)
 			position.x = 90.0f;
@@ -175,7 +177,8 @@ private:
 		if (position.z < -35.0f)
 			position.z = -35.0f;
 	}
-	// ��������ͷ���������
+	// is an end of the update chain, does not call more methods
+    //note that tis is not directly called by world, we pass through mouse first
 	void UpdateCamera() {
 		vec3 front;
 		front.x = cos(radians(yaw)) * cos(radians(pitch));

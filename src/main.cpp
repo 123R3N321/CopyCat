@@ -30,8 +30,10 @@ float FRAME_RATE = 60.0f;   //fps
 
 GLuint gameMode = 1;    //meant to have more possible vals in future
 
-float BALL_RED = 0.8;   //adjust the target ball color
-float BALL_BLUE = 0.2;
+int BALL_COUNT = 3;     //how many balls you want to be there
+
+float BALL_RED = 0.5;   //adjust the target ball color
+float BALL_BLUE = 0.7;
 float BALL_GREEN = 0.2;
 ///////////////////////////////////////////////////////////Above are adjustible globals//////////////////////////////////
 //////////////////////////////////////////////////////////Below are globals not meant to be tempered!
@@ -66,7 +68,7 @@ int main() {
         
     initWindow();
     initOpenGL();
-    World world(window, windowSize, BALL_RED, BALL_GREEN, BALL_BLUE);    //this is the only object main() creates
+    World world(window, windowSize, BALL_COUNT,BALL_RED, BALL_GREEN, BALL_BLUE);    //this is the only object main() creates
     //tentatively only support basic basic basics for readability and debugging
     world.askBallManagerToSetGameMode(gameMode);
     initTimeKeeper();

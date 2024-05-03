@@ -33,7 +33,7 @@ public:
 	Place(vec2 windowSize, Camera* camera) {
 		this->windowSize = windowSize;
 		this->camera = camera;
-		this->lightPos = vec3(0.0, 400.0, 150.0);
+		this->lightPos = vec3(-3.0, 400.0, 150.0);
 		mat4 lightProjection = ortho(-100.0f, 100.0f, -100.0f, 100.0f, 1.0f, 500.0f);
 		mat4 lightView = lookAt(lightPos, vec3(0.0f), vec3(0.0, 1.0, 0.0));
 		this->lightSpaceMatrix = lightProjection * lightView;

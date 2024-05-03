@@ -3,12 +3,10 @@
 
 //#include <glm/glm.hpp>
 #include "../library/include/glm/glm.hpp"
-
-
-
 //#include <glm/gtc/random.hpp>
 #include "../library/include/glm/gtc/random.hpp"
 
+//#include "../library/algos/aStar.h"   does not handle 3d well
 
 using namespace glm;
 #include <cstdlib>
@@ -25,15 +23,15 @@ private:
 
 	Model* ball;
 	Shader* ballShader;
-	GLuint number;						// ��ǰС����Ŀ
-	GLuint maxNumber;					// С�������Ŀ
-	vec3 basicPos;						// С���������
-	vector<vec3> position;				// ���ϴ��ڵ�С������
-	float moveSpeed;					// С���ƶ��ٶ�
-	GLuint score;						// �÷�
-	GLuint gameMode;					// ��Ϸģʽ
-	vec3 lightPos;						// ��Դλ��
-	mat4 lightSpaceMatrix;				// ��������������ת��Ϊ�Թ�ԴΪ���ĵ�����
+	GLuint number;						//
+	GLuint maxNumber;					//
+	vec3 basicPos;						//
+	vector<vec3> position;				//
+	float moveSpeed;					//
+	GLuint score;						//
+	GLuint gameMode;					//
+	vec3 lightPos;						//
+	mat4 lightSpaceMatrix;				//
 
 	Camera* camera;
 
@@ -42,7 +40,7 @@ private:
 	mat4 view;
     float ballRed, ballGreen,ballBlue;  //ball colors
 public:
-	BallManager(vec2 windowSize, Camera* camera, float r, float b, float g) {
+	BallManager(vec2 windowSize, Camera* camera, int ballcount, float r, float b, float g) {
         ballRed = r;
         ballBlue = b;
         ballGreen = g;
@@ -50,7 +48,7 @@ public:
 		this->camera = camera;
 		basicPos = vec3(0.0, 5.0, -30.0);
 		number = 0;
-		maxNumber = 3;
+		maxNumber = ballcount;
 		moveSpeed = 0.1f;
 		score = 0;
 		this->lightPos = vec3(0.0, 400.0, 150.0);
@@ -60,16 +58,16 @@ public:
 		AddBall();
 		LoadModel();
 	}
-	// ������Ϸģʽ
+	// game Mode adjustment
 	void setGameMode(GLuint num) {
         gameMode = num;
 	}
 	//
-	void Update(vec3 pos, vec3 dir, bool isShoot) {
+	void Update(vec3 pos, vec3 dir, bool isShot) {
 		this->view = camera->GetViewMatrix();
 		this->projection = perspective(radians(camera->GetZoom()), windowSize.x / windowSize.y, 0.1f, 500.0f);
 
-		if (isShoot) {
+		if (isShot) {
 			vector<vec3> temp;
 			for (GLuint i = 0; i < position.size(); i++) {
 				vec3 des = (pos.z - position[i].z) / (-dir.z) * dir + pos;
@@ -99,7 +97,7 @@ public:
 			AddBall();
 		}
 	}
-	// �ж���Ϸ�Ƿ����
+    //used to stop the game (player lost)
 	bool checkGameOverCondition() {
 		if (position.size() > 0)
 			if (position[0].z >= 70)
@@ -110,7 +108,7 @@ public:
 	GLuint GetScore() {
 		return score;
 	}
-	// ��ȾС��
+	// final render chain. does not call more renders
 	void Render(Shader* shader, GLuint depthMap = -1) {
 		for (GLuint i = 0; i < position.size(); i++) {
 			model = mat4(1.0);
