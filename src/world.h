@@ -79,8 +79,8 @@ public:
 		return ball->IsOver();
 	}
 	// ������Ϸģʽ
-	void SetGameModel(GLuint num) {
-		ball->SetGameModel(num);
+	void askBallManagerToSetGameMode(GLuint num) {
+        ball->setGameMode(num);
 	}
 private:
 	// ��Ⱦ���ͼ

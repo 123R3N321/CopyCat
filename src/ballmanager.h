@@ -31,7 +31,7 @@ private:
 	vector<vec3> position;				// ���ϴ��ڵ�С������
 	float moveSpeed;					// С���ƶ��ٶ�
 	GLuint score;						// �÷�
-	GLuint gameModel;					// ��Ϸģʽ
+	GLuint gameMode;					// ��Ϸģʽ
 	vec3 lightPos;						// ��Դλ��
 	mat4 lightSpaceMatrix;				// ��������������ת��Ϊ�Թ�ԴΪ���ĵ�����
 
@@ -57,10 +57,10 @@ public:
 		LoadModel();
 	}
 	// ������Ϸģʽ
-	void SetGameModel(GLuint num) {
-		gameModel = num;
+	void setGameMode(GLuint num) {
+        gameMode = num;
 	}
-	// ���±任�����ж�����Ƿ����С��
+	//
 	void Update(vec3 pos, vec3 dir, bool isShoot) {
 		this->view = camera->GetViewMatrix();
 		this->projection = perspective(radians(camera->GetZoom()), windowSize.x / windowSize.y, 0.1f, 500.0f);
@@ -79,7 +79,7 @@ public:
 			}
 			position = temp;
 		}
-		if (gameModel == 1) {
+		if (gameMode == 1) {
 			AddBall();
 			return;
 		}

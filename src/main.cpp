@@ -14,55 +14,52 @@
  * Overall architecture of reworked engine:
  *
  *
- *
- *
- * main-->world
+ *                  place
+ *                  player
+ * main-->world-->  camera
+ *                  ballManager
  */
 
+int WINDOW_WIDTH = 980;
+int WINDOW_HEIGHT = 540;
+const char* WINDOW_TITLE = "Experimenting";
 
-
-
-
-
-
-
-
-void OpenWindow();
-void PrepareOpenGL();
-
+///////////////////////////////////////////////////////////Above are adjustible globals//////////////////////////////////
+//////////////////////////////////////////////////////////Below are globals not meant to be tempered!
+void initWindow();
+void initOpenGL();
+void timeKeeper();
 
 GLFWwindow* window;
 vec2 windowSize;
 
+double currentFrame;
+double deltaTime;
+double prevFrame;
+double renderAccum = 0.0;
+
 int main() {
     //
-    const double TARGET_FRAME = 0.016667;                   // 1/60�룬ʵ��60֡
-    const double FRAME_ALPHA = 0.25;                        // ����ϵ��
-    double currentFrame;
-    double deltaTime;
-    double lastFrame;
-    double frameTime = 0.0;
-    double renderAccum = 0.0;
-    double smoothFrameTime = TARGET_FRAME;
+    const double TARGET_FRAME = 0.016667;                   // 1/60, use this to make sure deltaTime goes to 1sec
 
     srand(time(0));
 
-    GLuint gameModel = 1;
+    GLuint gameMode = 1;
     cout << "------------We are runing main------------\n";
-//    cin >> gameModel; try default param
+//    cin >> gameMode; try default param
     cout << "\n";
         
-    OpenWindow();
-    PrepareOpenGL();
+    initWindow();
+    initOpenGL();
     cout<<"is Opengl prepped?"<<endl;
     World world(window, windowSize);
     cout<<"Seems like world init is problem"<<endl;
 
     currentFrame = glfwGetTime();
-    lastFrame = currentFrame;
+    prevFrame = currentFrame;
 
-    world.SetGameModel(gameModel);
-    float gameTime = 0;
+    //tentatively only support basic basic basics for readability and debugging
+    world.askBallManagerToSetGameMode(gameMode);
 
     cout<<"right before loop?"<<endl;
 
@@ -71,10 +68,8 @@ int main() {
             && !glfwGetKey(window, GLFW_KEY_Q)) {
 //        cout<<"am I in loop?"<<endl;
         //
-        currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
-        renderAccum += deltaTime;
+
+        timeKeeper();
 
         if (renderAccum >= TARGET_FRAME) {
             
@@ -94,11 +89,14 @@ int main() {
     cout << "----------------------------world ended properly" << world.GetScore() << " ----------------------------" << endl;
     return 0;
 }
+/**
+ * uses main file global params:
+ *      WINDOW_WIDTH
+ *      WINDOW_HEIGHT
+ */
+void initWindow() {
 
-void OpenWindow() {
-    const char* TITLE = "Experimenting";
-    int WIDTH = 980;
-    int HEIGHT = 540;
+
 
     //
     if (!glfwInit()) {
@@ -111,7 +109,7 @@ void OpenWindow() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_REFRESH_RATE, 60);
 
-    window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -129,13 +127,20 @@ void OpenWindow() {
 
     glGetError();
 
-    windowSize = vec2(WIDTH, HEIGHT);
+    windowSize = vec2(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
-void PrepareOpenGL() {
+void initOpenGL() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glClearColor(0.529f, 0.808f, 0.922f, 0.0f);
+}
+
+void timeKeeper(){
+    currentFrame = glfwGetTime();
+    deltaTime = currentFrame - prevFrame;
+    prevFrame = currentFrame;
+    renderAccum += deltaTime;
 }

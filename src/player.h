@@ -102,7 +102,7 @@ private:
 	// ��������
 	void LoadTexture() {
 		diffuseMap = new Texture("../res/texture/gun-diffuse-map.jpg");
-		specularMap = new Texture("../res/texture/gun-specular-map.jpg");
+		specularMap = new Texture("../res/texture/gun-diffuse-map.jpg");
 	}
 	// ������ɫ��
 	void LoadShader() {

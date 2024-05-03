@@ -54,7 +54,7 @@ private:
 	// ���λ��
 	double mouseX;
 	double mouseY;
-	bool firstMouse;			// ����Ƿ��һ�ν��봰��
+	bool firstMouse;			//
 public:
 	Camera(GLFWwindow* window) {
 		this->window = window;
@@ -123,7 +123,7 @@ private:
 		mouseX = newMouseX;
 		mouseY = newMouseY;
 
-		// ��֤��������-90���90��֮��
+		//
 		if (pitch > 89.0f)
 			pitch = 89.0f;
 		if (pitch < -89.0f)
