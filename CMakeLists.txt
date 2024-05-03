@@ -1,3 +1,13 @@
+
+#ok this is the overall dependency architecture
+# main only depends on the world
+# world will depend on everything else
+
+# I need libraries, but local library does not solve cross-OS dependency issue
+#       --> solution: dumb approach, pack uo everything and throw into include
+#       --> opengl dependency soled using glad
+
+
 cmake_minimum_required(VERSION 3.28)
 project(CopyCat)
 
