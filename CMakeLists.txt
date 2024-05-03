@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(Shoot_Game)
+project(CopyCat)
 
 set(CMAKE_CXX_STANDARD 17)
 #set(CMAKE_PREFIX_PATH "/home/ren/projects/Shoot-Game/library/include")
@@ -23,7 +23,7 @@ include_directories(library/include/KHR)
 include_directories(library/include/stb_image)
 include_directories(src)
 
-add_executable(Shoot_Game
+add_executable(CopyCat
         library/include/assimp/Compiler/poppack1.h
         library/include/assimp/Compiler/pstdint.h
         library/include/assimp/Compiler/pushpack1.h
@@ -550,5 +550,5 @@ add_executable(Shoot_Game
         src/texture.h
         src/world.h)
 
-target_link_libraries(Shoot_Game PRIVATE glfw)
-target_link_libraries(Shoot_Game PRIVATE assimp)
+target_link_libraries(CopyCat PRIVATE glfw)
+target_link_libraries(CopyCat PRIVATE assimp)

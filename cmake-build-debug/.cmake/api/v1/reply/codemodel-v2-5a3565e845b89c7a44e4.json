@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "Shoot_Game",
+					"name" : "CopyCat",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "Shoot_Game::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Shoot_Game-Debug-6c74b6f4011459c8c511.json",
-					"name" : "Shoot_Game",
+					"id" : "CopyCat::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CopyCat-Debug-017582f78839880961b4.json",
+					"name" : "CopyCat",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/ren/projects/Shoot-Game/cmake-build-debug",
-		"source" : "/home/ren/projects/Shoot-Game"
+		"build" : "/home/ren/projects/CopyCat/cmake-build-debug",
+		"source" : "/home/ren/projects/CopyCat"
 	},
 	"version" : 
 	{

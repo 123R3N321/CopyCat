@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Shoot_Game"
+			"path" : "CopyCat"
 		}
 	],
 	"backtrace" : 1,
@@ -152,67 +152,67 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/home/ren/projects/Shoot-Game/library/include"
+					"path" : "/home/ren/projects/CopyCat/library/include"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp"
 				},
 				{
 					"backtrace" : 6,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp/Compiler"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp/Compiler"
 				},
 				{
 					"backtrace" : 7,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp/port"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp/port"
 				},
 				{
 					"backtrace" : 8,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp/port/AndroidJNI"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp/port/AndroidJNI"
 				},
 				{
 					"backtrace" : 9,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glad"
+					"path" : "/home/ren/projects/CopyCat/library/include/glad"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/GLFW"
+					"path" : "/home/ren/projects/CopyCat/library/include/GLFW"
 				},
 				{
 					"backtrace" : 11,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm"
 				},
 				{
 					"backtrace" : 12,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/detail"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/detail"
 				},
 				{
 					"backtrace" : 13,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/ext"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/ext"
 				},
 				{
 					"backtrace" : 14,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/gtc"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/gtc"
 				},
 				{
 					"backtrace" : 15,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/gtx"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/gtx"
 				},
 				{
 					"backtrace" : 16,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/simd"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/simd"
 				},
 				{
 					"backtrace" : 17,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/KHR"
+					"path" : "/home/ren/projects/CopyCat/library/include/KHR"
 				},
 				{
 					"backtrace" : 18,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/stb_image"
+					"path" : "/home/ren/projects/CopyCat/library/include/stb_image"
 				},
 				{
 					"backtrace" : 19,
-					"path" : "/home/ren/projects/Shoot-Game/src"
+					"path" : "/home/ren/projects/CopyCat/src"
 				}
 			],
 			"language" : "CXX",
@@ -242,67 +242,67 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/home/ren/projects/Shoot-Game/library/include"
+					"path" : "/home/ren/projects/CopyCat/library/include"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp"
 				},
 				{
 					"backtrace" : 6,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp/Compiler"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp/Compiler"
 				},
 				{
 					"backtrace" : 7,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp/port"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp/port"
 				},
 				{
 					"backtrace" : 8,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/assimp/port/AndroidJNI"
+					"path" : "/home/ren/projects/CopyCat/library/include/assimp/port/AndroidJNI"
 				},
 				{
 					"backtrace" : 9,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glad"
+					"path" : "/home/ren/projects/CopyCat/library/include/glad"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/GLFW"
+					"path" : "/home/ren/projects/CopyCat/library/include/GLFW"
 				},
 				{
 					"backtrace" : 11,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm"
 				},
 				{
 					"backtrace" : 12,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/detail"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/detail"
 				},
 				{
 					"backtrace" : 13,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/ext"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/ext"
 				},
 				{
 					"backtrace" : 14,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/gtc"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/gtc"
 				},
 				{
 					"backtrace" : 15,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/gtx"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/gtx"
 				},
 				{
 					"backtrace" : 16,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/glm/simd"
+					"path" : "/home/ren/projects/CopyCat/library/include/glm/simd"
 				},
 				{
 					"backtrace" : 17,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/KHR"
+					"path" : "/home/ren/projects/CopyCat/library/include/KHR"
 				},
 				{
 					"backtrace" : 18,
-					"path" : "/home/ren/projects/Shoot-Game/library/include/stb_image"
+					"path" : "/home/ren/projects/CopyCat/library/include/stb_image"
 				},
 				{
 					"backtrace" : 19,
-					"path" : "/home/ren/projects/Shoot-Game/src"
+					"path" : "/home/ren/projects/CopyCat/src"
 				}
 			],
 			"language" : "C",
@@ -312,7 +312,7 @@
 			]
 		}
 	],
-	"id" : "Shoot_Game::@6890427a1f51a3e7e1df",
+	"id" : "CopyCat::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -338,8 +338,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "Shoot_Game",
-	"nameOnDisk" : "Shoot_Game",
+	"name" : "CopyCat",
+	"nameOnDisk" : "CopyCat",
 	"paths" : 
 	{
 		"build" : ".",

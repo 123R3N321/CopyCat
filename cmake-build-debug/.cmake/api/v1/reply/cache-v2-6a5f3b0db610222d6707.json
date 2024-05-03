@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ren/projects/Shoot-Game/cmake-build-debug"
+			"value" : "/home/ren/projects/CopyCat/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ren/projects/Shoot-Game/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/home/ren/projects/CopyCat/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -603,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ren/projects/Shoot-Game"
+			"value" : "/home/ren/projects/CopyCat"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -843,7 +843,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Shoot_Game"
+			"value" : "CopyCat"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1142,7 +1142,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Shoot_Game_BINARY_DIR",
+			"name" : "CopyCat_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1151,10 +1151,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ren/projects/Shoot-Game/cmake-build-debug"
+			"value" : "/home/ren/projects/CopyCat/cmake-build-debug"
 		},
 		{
-			"name" : "Shoot_Game_IS_TOP_LEVEL",
+			"name" : "CopyCat_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1166,7 +1166,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Shoot_Game_SOURCE_DIR",
+			"name" : "CopyCat_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1175,7 +1175,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ren/projects/Shoot-Game"
+			"value" : "/home/ren/projects/CopyCat"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
