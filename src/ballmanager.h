@@ -56,8 +56,14 @@ public:
 		mat4 lightView = lookAt(lightPos, vec3(0.0f), vec3(0.0, 1.0, 0.0));
 		this->lightSpaceMatrix = lightProjection * lightView;
 		AddBall();
-		LoadModel();
+		LoadModel();    //this requires memory management
 	}
+
+    ~BallManager(){
+        delete ball;
+        delete ballShader;
+    }
+
 	// game Mode adjustment
 	void setGameMode(GLuint num) {
         gameMode = num;
@@ -146,7 +152,9 @@ private:
 		ballShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
 		ballShader->Unbind();
 	}
-	// ���С��
+
+
+	// this is called when init, and then every time a ball is shot
 	void AddBall() {
 		for (GLuint i = number; i < maxNumber; i++) {
 			float judgeX = rand() % 2;

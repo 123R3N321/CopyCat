@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(glfw3 REQUIRED)
 find_package(assimp REQUIRED)
 
+# ok this part may not even be necessary in the end
 include_directories(library/include)
 include_directories(library/include/assimp)
 include_directories(library/include/assimp/Compiler)

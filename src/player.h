@@ -43,6 +43,16 @@ public:
 		LoadTexture();
 		LoadShader();
 	}
+
+    ~Player(){
+        delete gun;
+        delete dot;
+        delete diffuseMap;
+        delete specularMap;
+        delete gunShader;
+        delete dotShader;
+    }
+
 	// we actually can forgo recoil
 	void Update(float deltaTime,  bool isShoot) {
 		if (isShoot)
@@ -67,7 +77,7 @@ public:
 		gunModel = translate(gunModel, vec3(-0.225, 0.0, -0.225));
 		gunModel = rotate(gunModel, radians(-170.0f), vec3(0.0, 1.0, 0.0));
 	}
-	// ��Ⱦ����
+	// called by world and is the end of chain. (gun rendered here)
 	void Render() {
 		dotShader->Bind();
 		dotShader->SetMat4("projection", projection);
@@ -94,19 +104,21 @@ public:
 		gunShader->Unbind();
 	}
 private:
-	// ����ǹģ��
+	// problem is I need another tool to inspect the obj
+    //for now we stick with what is given
 	void LoadGun() {
 		gun = new Model("../res/model/gun.obj");
+//        gun = new Model("../res/model/hammer.obj");
 		dot = new Model("../res/model/dot.obj");
 	}
-	// ��������
+	// easy part
 	void LoadTexture() {
 //		diffuseMap = new Texture("../res/texture/gun-diffuse-map.jpg");
         diffuseMap = new Texture("../res/texture/replica.jpg");
 
         specularMap = new Texture("../res/texture/gun-diffuse-map.jpg");
 	}
-	// ������ɫ��
+	// shaders, all stolen from somewhere
 	void LoadShader() {
 		gunShader = new Shader("../res/shader/gun.vert", "../res/shader/gun.frag");
 		gunShader->Bind();

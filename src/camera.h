@@ -3,13 +3,8 @@
 
 //#include <GLFW/glfw3.h>
 #include "../library/include/GLFW/glfw3.h"
-
-
-
 //#include <glm/glm.hpp>
 #include "../library/include/glm/glm.hpp"
-
-
 //#include <glm/gtc/matrix_transform.hpp>
 #include "../library/include/glm/gtc/matrix_transform.hpp"
 
@@ -51,10 +46,10 @@ private:
 	float mouseSensitivity;		//
 	float zoom;					//
 
-	// ���λ��
+	//
 	double mouseX;
 	double mouseY;
-	bool firstMouse;			//
+	bool cursurUpdateLock;			//
 public:
 	Camera(GLFWwindow* window) {
 		this->window = window;
@@ -62,7 +57,7 @@ public:
 		movementSpeed = SPEED;
 		mouseSensitivity = SENSITIVITY;
 		zoom = ZOOM;
-		firstMouse = true;
+        cursurUpdateLock = false;
 
 		jumpTimer = 0;
         isJumping = false;
@@ -107,23 +102,23 @@ public:
 		return zoom;
 	}
 private:
-	// �������
+	// shld really be named cursor movement
 	void MouseMovement() {
-		double newMouseX, newMouseY;
+		double currentCursorX, currentCursorY;
 
-		glfwGetCursorPos(window, &newMouseX, &newMouseY);
+		glfwGetCursorPos(window, &currentCursorX, &currentCursorY);
 
-		if (firstMouse) {
-			mouseX = newMouseX;
-			mouseY = newMouseY;
-			firstMouse = false;
+		if (! cursurUpdateLock) {
+			mouseX = currentCursorX;
+			mouseY = currentCursorY;
+            cursurUpdateLock = true;
 		}
 
-		yaw += ((newMouseX - mouseX) * mouseSensitivity);   //math copied as is
-		pitch += ((mouseY - newMouseY) * mouseSensitivity);
+		yaw += ((currentCursorX - mouseX) * mouseSensitivity);   //math copied as is
+		pitch += ((mouseY - currentCursorY) * mouseSensitivity);
 
-		mouseX = newMouseX;
-		mouseY = newMouseY;
+		mouseX = currentCursorX;
+		mouseY = currentCursorY;
 
 		//
 		if (pitch > 89.0f)
