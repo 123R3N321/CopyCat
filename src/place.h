@@ -13,19 +13,19 @@
 class Place {
 private:
 	vec2 windowSize;
-	// ����
+	//5 objects on the heap
 	Model* room;
 	Texture* roomTexture;
 	Shader* roomShader;
 
-	// ̫��
+	// ̫
 	Model* sun;
-	vec3 lightPos;							// ��Դλ��
-	mat4 lightSpaceMatrix;					// ��������������ת��Ϊ�Թ�ԴΪ���ĵ�����
+	vec3 lightPos;							// used to calculate sun angle
+	mat4 lightSpaceMatrix;
 	Shader* sunShader;
 
 	Camera* camera;
-	// ģ�ͱ任����
+	// view modification
 	mat4 model;
 	mat4 projection;
 	mat4 view;
@@ -41,7 +41,16 @@ public:
 		LoadTexture();
 		LoadShader();
 	}
-	// ���±任����
+
+    ~Place(){
+        delete room;
+        delete sun;
+        delete roomTexture;
+        delete roomShader;
+        delete sunShader;
+    }
+
+	// will update others
 	void Update() {
 		this->model = mat4(1.0);
 		this->view = camera->GetViewMatrix();
@@ -70,7 +79,7 @@ public:
 		shader->Unbind();
 		glBindVertexArray(0);
 	}
-	// ��Ⱦ̫��
+	// need to somehow change it
 	void SunRender() {
 		Shader* shader = sunShader;
 		shader->Bind();
@@ -88,11 +97,12 @@ private:
 		room = new Model("../res/model/room.obj");
 		sun = new Model("../res/model/sun.obj");
 	}
-	// ��������
+	// copied as is
 	void LoadTexture() {
-		roomTexture = new Texture("../res/texture/wall.jpg");
+//		roomTexture = new Texture("../res/texture/wall.jpg");
+        roomTexture = new Texture("../res/texture/greenWall.jpg");
 	}
-	// ������ɫ��
+	// copied as is
 	void LoadShader() {
 		roomShader = new Shader("../res/shader/room.vert", "../res/shader/room.frag");
 		roomShader->Bind();

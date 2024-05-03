@@ -19,8 +19,8 @@ private:
 	vec3 gunPos;						//change to doom style?
 	Shader* gunShader;
 	mat4 gunModel;						// this is using obj from online
-	Texture* diffuseMap;				// ?????????
-	Texture* specularMap;				// ??????????
+	Texture* diffuseMap;				// this is the actual texture
+	Texture* specularMap;				// this does not even matter
 	float gunRecoil;					// we can let go this one
 	//
 	Model* dot;							
@@ -43,7 +43,7 @@ public:
 		LoadTexture();
 		LoadShader();
 	}
-	// ���±任��������ͷλ�õ�����
+	// we actually can forgo recoil
 	void Update(float deltaTime,  bool isShoot) {
 		if (isShoot)
 			gunRecoil = 10.0f;
@@ -101,8 +101,10 @@ private:
 	}
 	// ��������
 	void LoadTexture() {
-		diffuseMap = new Texture("../res/texture/gun-diffuse-map.jpg");
-		specularMap = new Texture("../res/texture/gun-diffuse-map.jpg");
+//		diffuseMap = new Texture("../res/texture/gun-diffuse-map.jpg");
+        diffuseMap = new Texture("../res/texture/replica.jpg");
+
+        specularMap = new Texture("../res/texture/gun-diffuse-map.jpg");
 	}
 	// ������ɫ��
 	void LoadShader() {

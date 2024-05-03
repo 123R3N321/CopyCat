@@ -36,12 +36,16 @@ private:
 	mat4 lightSpaceMatrix;				// ��������������ת��Ϊ�Թ�ԴΪ���ĵ�����
 
 	Camera* camera;
-	// ģ�ͱ任����
+
 	mat4 model;
 	mat4 projection;
 	mat4 view;
+    float ballRed, ballGreen,ballBlue;  //ball colors
 public:
-	BallManager(vec2 windowSize, Camera* camera) {
+	BallManager(vec2 windowSize, Camera* camera, float r, float b, float g) {
+        ballRed = r;
+        ballBlue = b;
+        ballGreen = g;
 		this->windowSize = windowSize;
 		this->camera = camera;
 		basicPos = vec3(0.0, 5.0, -30.0);
@@ -96,7 +100,7 @@ public:
 		}
 	}
 	// �ж���Ϸ�Ƿ����
-	bool IsOver() {
+	bool checkGameOverCondition() {
 		if (position.size() > 0)
 			if (position[0].z >= 70)
 				return true;
@@ -137,7 +141,7 @@ private:
 		ball = new Model("../res/model/dot.obj");
 		ballShader = new Shader("../res/shader/ball.vert", "../res/shader/ball.frag");
 		ballShader->Bind();
-		ballShader->SetVec3("color", vec3(0.2, 0.5, 0.5f));
+		ballShader->SetVec3("color", vec3(ballRed, ballBlue, ballGreen));
 		ballShader->SetInt("shadowMap", 0);
 		ballShader->SetVec3("lightPos", lightPos);
 		ballShader->SetVec3("viewPos", camera->GetPosition());

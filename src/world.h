@@ -13,32 +13,32 @@ private:
 	GLFWwindow* window;
 	vec2 windowSize;
 
-	Place* place;				//
+    BallManager* ball;			//all 4 will be on the heap and need deletion
+    Camera* camera;				// note that camera must be initialized first for other objects
+    Place* place;				//
 	Player* player;				//
-	Camera* camera;				//
-	BallManager* ball;			//
 
-	//
-	GLuint depthMap;
+    Shader* depthShader;  //this one also on heap
+    GLuint depthMap;
 	GLuint depthMapFBO;
-	Shader* simpleDepthShader;
 	mat4 lightSpaceMatrix;
+
 public:
-	World(GLFWwindow* window, vec2 windowSize) {
+	World(GLFWwindow* window, vec2 windowSize, float r, float b, float g) {
 		this->window = window;
 		this->windowSize = windowSize;
 
-		simpleDepthShader = new Shader("../res/shader/shadow.vert", "../res/shader/shadow.frag");
+        depthShader = new Shader("../res/shader/shadow.vert", "../res/shader/shadow.frag");
 
-		vec3 lightPos(0.0, 400.0, 150.0);
+		vec3 lightPos(-0.0, 400.0, 150.0);      //this part of the code is copied as is
 		mat4 lightProjection = ortho(-100.0f, 100.0f, -100.0f, 100.0f, 1.0f, 500.0f);
 		mat4 lightView = lookAt(lightPos, vec3(0.0f), vec3(0.0, 1.0, 0.0));
 		lightSpaceMatrix = lightProjection * lightView;
 
-		camera = new Camera(window);
+        camera = new Camera(window);    //must be initialized first for the rest
+        ball = new BallManager(windowSize, camera, r, b, g);
 		place = new Place(windowSize, camera);
 		player = new Player(windowSize, camera);
-		ball = new BallManager(windowSize, camera);
 
 		glGenFramebuffers(1, &depthMapFBO);
 		glGenTextures(1, &depthMap);
@@ -49,6 +49,17 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
+
+    /*
+     * safe deletion for memory management
+     */
+    ~World(){
+        delete ball;
+        delete camera;
+        delete place;
+        delete player;
+        delete depthShader;
+    }
 	//
 	void Update(float deltaTime) {
 		camera->Update(deltaTime);
@@ -75,8 +86,8 @@ public:
 		return ball->GetScore();
 	}
 	// �ж���Ϸ�Ƿ����
-	bool IsOver() {
-		return ball->IsOver();
+	bool askBallManagerIfGameOver() {
+		return ball->checkGameOverCondition();
 	}
 	// ������Ϸģʽ
 	void askBallManagerToSetGameMode(GLuint num) {
@@ -90,13 +101,13 @@ private:
 		glDrawBuffer(GL_NONE);
 		glReadBuffer(GL_NONE);
 
-		simpleDepthShader->Bind();
-		simpleDepthShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
+		depthShader->Bind();
+		depthShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
 
 		glViewport(0, 0, 1024, 1024);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		place->RoomRender(simpleDepthShader);
-		ball->Render(simpleDepthShader);
+		place->RoomRender(depthShader);
+		ball->Render(depthShader);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		glViewport(0, 0, windowSize.x, windowSize.y);
